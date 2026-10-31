@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#F5F3E7">
+  <meta name="description" content="Join us for the wedding celebrations of Durga Prasanth & Suvedha on 12–13 December 2026 in Coimbatore.">
+  <title>Durga Prasanth & Suvedha | Wedding Invitation</title>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Durga Prasanth & Suvedha | Wedding Invitation">
+  <meta property="og:description" content="Join us for our wedding celebrations on 12–13 December 2026 in Coimbatore.">
+  <!-- After deploy: replace YOUR-SITE with your Netlify URL (required for WhatsApp preview) -->
+  <meta property="og:url" content="https://YOUR-SITE.netlify.app/">
+  <meta property="og:image" content="https://YOUR-SITE.netlify.app/assets/images/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wedding.css">
+</head>
+<body>
+
+  <div id="open-cover" class="open-cover" role="dialog" aria-modal="true" aria-label="Open wedding invitation">
+    <div class="open-cover__poster" id="cover-poster" aria-hidden="true"></div>
+    <div class="open-cover__veil"></div>
+    <div class="open-cover__frame"></div>
+    <div class="open-cover__inner">
+      <div class="monogram" id="cover-monogram" aria-hidden="true"></div>
+      <p class="eyebrow" id="cover-eyebrow"></p>
+      <h1 class="open-cover__title" id="cover-title"></h1>
+      <p class="open-cover__couple" id="cover-couple"></p>
+      <p class="open-cover__date" id="cover-date"></p>
+      <button type="button" class="btn btn--primary" id="btn-open-music"></button>
+      <button type="button" class="btn btn--text" id="btn-open-silent"></button>
+    </div>
+  </div>
+
+  <header class="site-header" id="top" hidden>
+    <div class="container site-header__inner">
+      <div class="site-header__brand">
+        <span class="monogram monogram--sm" id="header-monogram"></span>
+      </div>
+      <p class="site-header__tagline" id="header-tagline"></p>
+      <p class="site-header__place" id="header-place"></p>
+    </div>
+  </header>
+
+  <main id="main-content" class="main" hidden>
+    <section class="hero reveal" id="hero" aria-labelledby="hero-names">
+      <div class="hero__media" id="hero-media"></div>
+      <div class="hero__overlay"></div>
+      <div class="hero__garland" id="hero-garland-accent" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <p class="eyebrow" id="hero-intro"></p>
+        <h1 class="hero__names" id="hero-names"></h1>
+        <p class="hero__invite" id="hero-invite"></p>
+        <p class="hero__dates" id="hero-dates"><span></span></p>
+        <p class="hero__scroll" id="hero-scroll-hint" aria-hidden="true"></p>
+      </div>
+    </section>
+
+    <section class="story" id="story" aria-labelledby="story-heading">
+      <div class="container story__intro reveal">
+        <p class="eyebrow" id="story-eyebrow"></p>
+        <h2 class="section__title section__title--center" id="story-heading"></h2>
+        <p class="story__lead" id="story-intro"></p>
+      </div>
+      <div class="story__chapters" id="story-chapters"></div>
+    </section>
+
+    <section class="section section--invite reveal" id="invitation-card" aria-labelledby="invite-card-heading">
+      <div class="container invite-card">
+        <div class="invite-card__copy">
+          <p class="eyebrow" id="invite-card-eyebrow"></p>
+          <h2 class="section__title" id="invite-card-heading"></h2>
+          <p class="section__body invite-card__body" id="invite-card-body"></p>
+        </div>
+        <figure class="invite-card__figure">
+          <img id="invite-poster-img" src="" alt="Wedding invitation poster" loading="lazy" width="600" height="900">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--note reveal" id="note" aria-labelledby="note-heading">
+      <div class="container note-split">
+        <figure class="note-split__figure">
+          <img id="note-image" src="" alt="" loading="lazy" width="480" height="640">
+        </figure>
+        <div class="note-split__copy">
+          <p class="eyebrow" id="note-eyebrow"></p>
+          <h2 class="section__title" id="note-heading"></h2>
+          <p class="section__body note-split__body" id="note-body"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--family reveal is-hidden" id="family" aria-labelledby="family-heading">
+      <div class="container section--narrow">
+        <p class="eyebrow" id="family-intro"></p>
+        <div class="family-grid" id="family-content"></div>
+      </div>
+    </section>
+
+    <section class="section section--events reveal" id="events" aria-labelledby="events-heading">
+      <div class="container">
+        <h2 class="section__title section__title--center" id="events-heading">The celebrations</h2>
+        <p class="events__intro" id="events-intro"></p>
+        <div class="events-grid" id="events-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--venue reveal" id="venue" aria-labelledby="venue-name">
+      <div class="container venue-split">
+        <div class="venue-split__copy">
+          <p class="eyebrow" id="venue-eyebrow"></p>
+          <h2 class="section__title" id="venue-name"></h2>
+          <address class="venue__address" id="venue-address"></address>
+          <a class="btn btn--outline" id="venue-maps" target="_blank" rel="noopener noreferrer">
+            Open venue in Maps
+          </a>
+        </div>
+        <figure class="venue-split__figure">
+          <img id="venue-image" src="" alt="" loading="lazy" width="640" height="800">
+        </figure>
+      </div>
+    </section>
+
+    <section class="countdown reveal" id="countdown" aria-labelledby="countdown-heading">
+      <div class="container">
+        <p class="eyebrow eyebrow--light" id="countdown-eyebrow"></p>
+        <h2 class="countdown__title" id="countdown-heading"></h2>
+        <div class="countdown__switch" id="countdown-switch" role="group" aria-label="Count down to"></div>
+        <div class="counter" id="counter" aria-live="polite">
+          <div class="counter__item"><strong id="cd-days">00</strong><span>Days</span></div>
+          <div class="counter__item"><strong id="cd-hours">00</strong><span>Hours</span></div>
+          <div class="counter__item"><strong id="cd-minutes">00</strong><span>Minutes</span></div>
+          <div class="counter__item"><strong id="cd-seconds">00</strong><span>Seconds</span></div>
+        </div>
+        <p class="countdown__foot" id="countdown-foot"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer reveal" id="footer" hidden>
+    <div class="container footer__inner">
+      <p class="footer__sign" id="footer-sign"></p>
+      <button type="button" class="btn btn--ghost" id="btn-share">Share invitation</button>
+    </div>
+    <p class="footer__credit" id="footer-credit"></p>
+  </footer>
+
+  <button type="button" class="music-toggle is-hidden" id="music-toggle" aria-pressed="false" aria-label="Play background music">
+    <span class="music-toggle__dot" aria-hidden="true"></span>
+    <span id="music-label">Music</span>
+  </button>
+
+  <audio id="bg-music" loop preload="none"></audio>
+
+  <script src="wedding-data.js"></script>
+  <script src="wedding.js"></script>
+</body>
+</html>
