@@ -153,6 +153,6 @@ const weddingData = {
       "Join us for our wedding celebrations on 12–13 December 2026 in Coimbatore.",
     themeColor: "#F5F3E7",
     ogImage: "assets/images/og-preview.jpg",
-    siteUrl: "",
+    siteUrl: "https://durga-suvedha-wedding.netlify.app",
   },
 };
