@@ -44,8 +44,8 @@ const weddingData = {
       day: "Sunday",
       time: "7:00 AM onwards",
       timezone: "Indian Standard Time (IST)",
-      image: "assets/images/event-ceremony-art.jpg",
-      imageAlt: "Traditional wedding ceremony illustration",
+      image: "assets/images/muhurtham.jpg",
+      imageAlt: "Muhurtham — sacred wedding ceremony",
     },
   },
 
@@ -135,8 +135,8 @@ const weddingData = {
     heroGarlandAccent: "",
     coverPoster: "assets/images/poster.jpg",
     posterImage: "assets/images/poster.jpg",
-    noteImage: "assets/images/story-steps.jpg",
-    noteImageAlt: "Sacred steps wedding illustration",
+    noteImage: "assets/images/note-courtyard.png",
+    noteImageAlt: "Festive Indian courtyard decorated for celebration",
     musicSrc: "",
   },
 
