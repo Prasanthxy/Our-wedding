@@ -105,7 +105,7 @@ const weddingData = {
     eyebrow: "The invitation",
     heading: "Crafted with love, meant for you",
     body:
-      "Your printed invitation carries the same warmth we hope you feel here — botanical details, our names, and the dates we want you to save.",
+      "We brought our celebration details together here for you — our names, the days that matter, and everything you need to join us in Coimbatore.",
   },
 
   copy: {
