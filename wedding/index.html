@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#F5F3E7">
+  <audio id="bg-music" src="assets/Wedding_Bgm.mp3" autoplay loop preload="auto"></audio>
+  <script>
+    (function () {
+      var audio = document.getElementById("bg-music");
+      if (!audio) return;
+      audio.volume = 0.45;
+      var pending = audio.play();
+      if (pending && pending.catch) pending.catch(function () {});
+    })();
+  </script>
   <meta name="description" content="Join us for the wedding celebrations of Durga Prasanth & Suvedha on 12–13 December 2026 in Coimbatore.">
   <title>Durga Prasanth & Suvedha | Wedding Invitation</title>
 
@@ -85,18 +95,6 @@
       </div>
     </section>
 
-    <section class="section section--invite reveal" id="invitation-card" aria-labelledby="card-line">
-      <div class="container invite-poster">
-        <div class="invite-poster__copy">
-          <p class="eyebrow" id="card-eyebrow"></p>
-          <p class="invite-poster__line" id="card-line"></p>
-        </div>
-        <figure class="invite-card__figure">
-          <img id="invite-poster-img" src="" alt="Wedding invitation card" loading="lazy" width="600" height="900">
-        </figure>
-      </div>
-    </section>
-
     <section class="countdown reveal" id="countdown" aria-labelledby="countdown-heading">
       <div class="container">
         <p class="eyebrow eyebrow--light" id="countdown-eyebrow"></p>
@@ -125,8 +123,6 @@
     <span class="music-toggle__dot" aria-hidden="true"></span>
     <span id="music-label">Play</span>
   </button>
-
-  <audio id="bg-music" autoplay loop preload="auto"></audio>
 
   <script src="wedding-data.js"></script>
   <script src="wedding.js"></script>
