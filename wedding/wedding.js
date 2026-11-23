@@ -59,14 +59,6 @@ function populateContent() {
   setText("gallery-heading", copy.galleryHeading || "");
   setText("gallery-lead", copy.galleryLead || "");
   document.getElementById("gallery-grid").innerHTML = buildGalleryHtml(d.gallery || []);
-  setText("card-eyebrow", copy.cardEyebrow || "");
-  setText("card-line", copy.cardLine || "");
-
-  const posterImg = document.getElementById("invite-poster-img");
-  if (media.posterImage && posterImg) {
-    posterImg.src = media.posterImage;
-    posterImg.alt = `${couple.groomName} and ${couple.brideName} wedding invitation`;
-  }
 
   if (family.show && (family.groomParents || family.brideParents)) {
     const section = document.getElementById("family");
@@ -100,8 +92,10 @@ function populateContent() {
   setText("footer-credit", copy.footerCredit);
 
   const audio = document.getElementById("bg-music");
-  if (media.musicSrc) {
-    audio.src = media.musicSrc;
+  if (media.musicSrc && audio) {
+    if (audio.getAttribute("src") !== media.musicSrc) {
+      audio.src = media.musicSrc;
+    }
     audio.loop = true;
     audio.volume = typeof media.musicVolume === "number" ? media.musicVolume : 0.45;
   }
