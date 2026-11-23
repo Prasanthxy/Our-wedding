@@ -278,20 +278,38 @@ function initMusic() {
   const btn = document.getElementById("music-toggle");
   if (!weddingData.media.musicSrc) return;
 
+  let userPaused = false;
+
+  function tryPlay() {
+    if (userPaused || !audio.paused) return;
+    const pending = audio.play();
+    if (pending) pending.catch(() => {});
+  }
+
   btn.classList.remove("is-hidden");
   syncMusicUi();
-  btn.addEventListener("click", () => {
+
+  btn.addEventListener("click", (event) => {
+    event.stopPropagation();
     if (audio.paused) {
-      audio.play().catch(() => {});
+      userPaused = false;
+      tryPlay();
     } else {
+      userPaused = true;
       audio.pause();
     }
   });
 
   audio.addEventListener("play", syncMusicUi);
   audio.addEventListener("pause", syncMusicUi);
+  audio.addEventListener("canplay", tryPlay);
 
-  audio.play().catch(() => {});
+  document.addEventListener("pointerdown", (event) => {
+    if (btn.contains(event.target)) return;
+    tryPlay();
+  }, true);
+
+  tryPlay();
 }
 
 function syncMusicUi() {
