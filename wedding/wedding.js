@@ -3,10 +3,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   applyMeta();
   populateContent();
-  initOpenCover();
   initCountdown();
   initScrollReveal();
-  initStoryMotion();
   initShare();
   initMusic();
 });
@@ -26,21 +24,7 @@ function applyMeta() {
 
 function populateContent() {
   const d = weddingData;
-  const { couple, copy, cover, venue, family, media, story, invitationCard } = d;
-
-  const coverPoster = document.getElementById("cover-poster");
-  if (media.coverPoster && coverPoster) {
-    coverPoster.style.backgroundImage = `url("${media.coverPoster}")`;
-  }
-
-  setText("cover-monogram", couple.monogram);
-  setText("cover-eyebrow", cover.eyebrow);
-  setText("cover-title", cover.title);
-  document.getElementById("cover-couple").innerHTML =
-    `${escapeHtml(couple.groomName)} <span class="amp">&amp;</span> ${escapeHtml(couple.brideName)}`;
-  setText("cover-date", `${copy.heroDates} · Coimbatore`);
-  setText("btn-open-music", cover.openButton);
-  setText("btn-open-silent", cover.skipMusic);
+  const { couple, copy, venue, family, media } = d;
 
   setText("header-monogram", couple.monogram);
   setText("header-tagline", copy.siteTagline);
@@ -71,29 +55,17 @@ function populateContent() {
   );
   setText("hero-invite", copy.heroInvite);
   document.querySelector("#hero-dates span").textContent = copy.heroDates;
-  setText("hero-scroll-hint", copy.heroScrollHint || "");
 
-  setText("story-eyebrow", story.eyebrow);
-  setText("story-heading", story.heading);
-  setText("story-intro", story.intro);
-  document.getElementById("story-chapters").innerHTML = buildStoryHtml(story.chapters);
+  setText("gallery-heading", copy.galleryHeading || "");
+  setText("gallery-lead", copy.galleryLead || "");
+  document.getElementById("gallery-grid").innerHTML = buildGalleryHtml(d.gallery || []);
+  setText("card-eyebrow", copy.cardEyebrow || "");
+  setText("card-line", copy.cardLine || "");
 
-  setText("invite-card-eyebrow", invitationCard.eyebrow);
-  setText("invite-card-heading", invitationCard.heading);
-  setText("invite-card-body", invitationCard.body);
   const posterImg = document.getElementById("invite-poster-img");
   if (media.posterImage && posterImg) {
     posterImg.src = media.posterImage;
     posterImg.alt = `${couple.groomName} and ${couple.brideName} wedding invitation`;
-  }
-
-  setText("note-eyebrow", copy.noteEyebrow);
-  setText("note-heading", copy.noteHeading);
-  setText("note-body", copy.noteBody);
-  const noteImg = document.getElementById("note-image");
-  if (media.noteImage && noteImg) {
-    noteImg.src = media.noteImage;
-    noteImg.alt = media.noteImageAlt || "";
   }
 
   if (family.show && (family.groomParents || family.brideParents)) {
@@ -108,6 +80,7 @@ function populateContent() {
 
   setText("venue-eyebrow", copy.venueEyebrow);
   setText("venue-name", venue.name);
+  setText("venue-note", copy.venueNote || "");
   document.getElementById("venue-address").innerHTML = venue.addressLines
     .map((line) => escapeHtml(line))
     .join("<br>");
@@ -129,8 +102,8 @@ function populateContent() {
   const audio = document.getElementById("bg-music");
   if (media.musicSrc) {
     audio.src = media.musicSrc;
-  } else {
-    document.getElementById("btn-open-music").textContent = cover.openButton;
+    audio.loop = true;
+    audio.volume = typeof media.musicVolume === "number" ? media.musicVolume : 0.45;
   }
 }
 
@@ -145,20 +118,16 @@ function buildFamilyHtml(family, couple) {
   return html;
 }
 
-function buildStoryHtml(chapters) {
-  return chapters
+function buildGalleryHtml(images) {
+  return images
     .map(
-      (ch, i) => `
-      <article class="story-chapter reveal ${ch.reverse ? "story-chapter--reverse" : ""}">
-        <div class="story-chapter__media">
-          <img src="${escapeHtml(ch.image)}" alt="${escapeHtml(ch.imageAlt)}" loading="${i === 0 ? "eager" : "lazy"}" width="640" height="480">
+      (img) => `
+      <figure class="gallery__item">
+        <div class="gallery__frame">
+          <img src="${escapeHtml(img.image)}" alt="${escapeHtml(img.imageAlt || "")}" loading="lazy" width="640" height="480">
         </div>
-        <div class="story-chapter__copy">
-          <p class="story-chapter__step">${escapeHtml(ch.step)}</p>
-          <h3 class="story-chapter__title">${escapeHtml(ch.title)}</h3>
-          <p class="story-chapter__body">${escapeHtml(ch.body)}</p>
-        </div>
-      </article>`
+        ${img.caption ? `<figcaption class="gallery__caption">${escapeHtml(img.caption)}</figcaption>` : ""}
+      </figure>`
     )
     .join("");
 }
@@ -174,69 +143,15 @@ function buildEventsHtml(events) {
         <article class="event-card">
           ${imgBlock}
           <div class="event-card__body">
-            <p class="event-card__step">${escapeHtml(e.shortLabel)}</p>
             <h3 class="event-card__title">${escapeHtml(e.label)}</h3>
-            <p class="event-card__row"><strong>${escapeHtml(e.displayDate)}</strong> · ${escapeHtml(e.day)}</p>
-            <p class="event-card__row">${escapeHtml(e.time)}</p>
-            <p class="event-card__row">${escapeHtml(e.timezone)}</p>
+            <p class="event-card__day">${escapeHtml(e.day)}</p>
+            <p class="event-card__date">${escapeHtml(e.displayDate)}</p>
+            <p class="event-card__time">${escapeHtml(e.time)}</p>
+            ${e.note ? `<p class="event-card__note">${escapeHtml(e.note)}</p>` : ""}
           </div>
         </article>`;
     })
     .join("");
-}
-
-function initStoryMotion() {
-  const mediaBlocks = document.querySelectorAll(".story-chapter__media img");
-  if (!mediaBlocks.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.style.transform = entry.isIntersecting
-          ? "scale(1) translateY(0)"
-          : "scale(1.04) translateY(8px)";
-      });
-    },
-    { threshold: 0.2, rootMargin: "0px 0px -5% 0px" }
-  );
-
-  mediaBlocks.forEach((img) => {
-    img.style.transition = "transform 0.9s ease";
-    observer.observe(img);
-  });
-}
-
-function initOpenCover() {
-  const cover = document.getElementById("open-cover");
-  const main = document.getElementById("main-content");
-  const footer = document.getElementById("footer");
-  const audio = document.getElementById("bg-music");
-  const musicBtn = document.getElementById("music-toggle");
-  const hasMusic = Boolean(weddingData.media.musicSrc);
-
-  function enter(withMusic) {
-    cover.classList.add("dismissed");
-    setTimeout(() => {
-      cover.hidden = true;
-      document.getElementById("top").hidden = false;
-      main.hidden = false;
-      footer.hidden = false;
-      if (hasMusic) {
-        musicBtn.classList.remove("is-hidden");
-      }
-    }, 720);
-    if (withMusic && hasMusic) {
-      audio.play().catch(() => {});
-      syncMusicUi();
-    }
-  }
-
-  document.getElementById("btn-open-music").addEventListener("click", () => enter(hasMusic));
-  document.getElementById("btn-open-silent").addEventListener("click", () => enter(false));
-
-  if (!hasMusic) {
-    document.getElementById("btn-open-silent").classList.add("is-hidden");
-  }
 }
 
 function initCountdown() {
@@ -251,7 +166,7 @@ function initCountdown() {
 
   switchEl.innerHTML = `
     <button type="button" data-event="reception" id="clock-reception">Reception</button>
-    <button type="button" data-event="ceremony" id="clock-ceremony">Wedding</button>`;
+    <button type="button" data-event="ceremony" id="clock-ceremony">Muhurtham</button>`;
 
   switchEl.querySelectorAll("button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -363,17 +278,20 @@ function initMusic() {
   const btn = document.getElementById("music-toggle");
   if (!weddingData.media.musicSrc) return;
 
+  btn.classList.remove("is-hidden");
+  syncMusicUi();
   btn.addEventListener("click", () => {
     if (audio.paused) {
       audio.play().catch(() => {});
     } else {
       audio.pause();
     }
-    syncMusicUi();
   });
 
   audio.addEventListener("play", syncMusicUi);
   audio.addEventListener("pause", syncMusicUi);
+
+  audio.play().catch(() => {});
 }
 
 function syncMusicUi() {
@@ -382,7 +300,8 @@ function syncMusicUi() {
   const playing = !audio.paused;
   btn.classList.toggle("on", playing);
   btn.setAttribute("aria-pressed", String(playing));
-  document.getElementById("music-label").textContent = playing ? "Music on" : "Music";
+  btn.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
+  document.getElementById("music-label").textContent = playing ? "Pause" : "Play";
 }
 
 function setText(id, text) {
