@@ -93,8 +93,6 @@ const weddingData = {
     eventsIntro: "Please be with us for both celebrations.",
     galleryHeading: "A few moments",
     galleryLead: "Traditions we are grateful to share.",
-    cardEyebrow: "The invitation",
-    cardLine: "Your presence would mean the world.",
     countdownEyebrow: "Until we say I do",
     countdownHeading: "Counting down to our wedding",
     venueEyebrow: "Where we gather",
