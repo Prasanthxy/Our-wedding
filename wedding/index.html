@@ -22,22 +22,7 @@
 </head>
 <body>
 
-  <div id="open-cover" class="open-cover" role="dialog" aria-modal="true" aria-label="Open wedding invitation">
-    <div class="open-cover__poster" id="cover-poster" aria-hidden="true"></div>
-    <div class="open-cover__veil"></div>
-    <div class="open-cover__frame"></div>
-    <div class="open-cover__inner">
-      <div class="monogram" id="cover-monogram" aria-hidden="true"></div>
-      <p class="eyebrow" id="cover-eyebrow"></p>
-      <h1 class="open-cover__title" id="cover-title"></h1>
-      <p class="open-cover__couple" id="cover-couple"></p>
-      <p class="open-cover__date" id="cover-date"></p>
-      <button type="button" class="btn btn--primary" id="btn-open-music"></button>
-      <button type="button" class="btn btn--text" id="btn-open-silent"></button>
-    </div>
-  </div>
-
-  <header class="site-header" id="top" hidden>
+  <header class="site-header" id="top">
     <div class="container site-header__inner">
       <div class="site-header__brand">
         <span class="monogram monogram--sm" id="header-monogram"></span>
@@ -47,7 +32,7 @@
     </div>
   </header>
 
-  <main id="main-content" class="main" hidden>
+  <main id="main-content" class="main">
     <section class="hero reveal" id="hero" aria-labelledby="hero-names">
       <div class="hero__media" id="hero-media"></div>
       <div class="hero__overlay"></div>
@@ -57,55 +42,12 @@
         <h1 class="hero__names" id="hero-names"></h1>
         <p class="hero__invite" id="hero-invite"></p>
         <p class="hero__dates" id="hero-dates"><span></span></p>
-        <p class="hero__scroll" id="hero-scroll-hint" aria-hidden="true"></p>
-      </div>
-    </section>
-
-    <section class="story" id="story" aria-labelledby="story-heading">
-      <div class="container story__intro reveal">
-        <p class="eyebrow" id="story-eyebrow"></p>
-        <h2 class="section__title section__title--center" id="story-heading"></h2>
-        <p class="story__lead" id="story-intro"></p>
-      </div>
-      <div class="story__chapters" id="story-chapters"></div>
-    </section>
-
-    <section class="section section--invite reveal" id="invitation-card" aria-labelledby="invite-card-heading">
-      <div class="container invite-card">
-        <div class="invite-card__copy">
-          <p class="eyebrow" id="invite-card-eyebrow"></p>
-          <h2 class="section__title" id="invite-card-heading"></h2>
-          <p class="section__body invite-card__body" id="invite-card-body"></p>
-        </div>
-        <figure class="invite-card__figure">
-          <img id="invite-poster-img" src="" alt="Wedding invitation poster" loading="lazy" width="600" height="900">
-        </figure>
-      </div>
-    </section>
-
-    <section class="section section--note reveal" id="note" aria-labelledby="note-heading">
-      <div class="container note-split">
-        <figure class="note-split__figure">
-          <img id="note-image" src="" alt="" loading="lazy" width="480" height="640">
-        </figure>
-        <div class="note-split__copy">
-          <p class="eyebrow" id="note-eyebrow"></p>
-          <h2 class="section__title" id="note-heading"></h2>
-          <p class="section__body note-split__body" id="note-body"></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--family reveal is-hidden" id="family" aria-labelledby="family-heading">
-      <div class="container section--narrow">
-        <p class="eyebrow" id="family-intro"></p>
-        <div class="family-grid" id="family-content"></div>
       </div>
     </section>
 
     <section class="section section--events reveal" id="events" aria-labelledby="events-heading">
       <div class="container">
-        <h2 class="section__title section__title--center" id="events-heading">The celebrations</h2>
+        <h2 class="section__title section__title--center" id="events-heading">Reception &amp; Muhurtham</h2>
         <p class="events__intro" id="events-intro"></p>
         <div class="events-grid" id="events-grid"></div>
       </div>
@@ -117,12 +59,40 @@
           <p class="eyebrow" id="venue-eyebrow"></p>
           <h2 class="section__title" id="venue-name"></h2>
           <address class="venue__address" id="venue-address"></address>
+          <p class="venue__note" id="venue-note"></p>
           <a class="btn btn--outline" id="venue-maps" target="_blank" rel="noopener noreferrer">
-            Open venue in Maps
+            Get directions
           </a>
         </div>
         <figure class="venue-split__figure">
           <img id="venue-image" src="" alt="" loading="lazy" width="640" height="800">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--family reveal is-hidden" id="family" aria-labelledby="family-heading">
+      <div class="container section--narrow">
+        <p class="eyebrow" id="family-intro"></p>
+        <div class="family-grid" id="family-content"></div>
+      </div>
+    </section>
+
+    <section class="section section--gallery reveal" id="gallery" aria-labelledby="gallery-heading">
+      <div class="container">
+        <h2 class="section__title section__title--center" id="gallery-heading"></h2>
+        <p class="gallery__lead" id="gallery-lead"></p>
+        <div class="gallery" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--invite reveal" id="invitation-card" aria-labelledby="card-line">
+      <div class="container invite-poster">
+        <div class="invite-poster__copy">
+          <p class="eyebrow" id="card-eyebrow"></p>
+          <p class="invite-poster__line" id="card-line"></p>
+        </div>
+        <figure class="invite-card__figure">
+          <img id="invite-poster-img" src="" alt="Wedding invitation card" loading="lazy" width="600" height="900">
         </figure>
       </div>
     </section>
@@ -143,7 +113,7 @@
     </section>
   </main>
 
-  <footer class="footer reveal" id="footer" hidden>
+  <footer class="footer reveal" id="footer">
     <div class="container footer__inner">
       <p class="footer__sign" id="footer-sign"></p>
       <button type="button" class="btn btn--ghost" id="btn-share">Share invitation</button>
@@ -153,10 +123,10 @@
 
   <button type="button" class="music-toggle is-hidden" id="music-toggle" aria-pressed="false" aria-label="Play background music">
     <span class="music-toggle__dot" aria-hidden="true"></span>
-    <span id="music-label">Music</span>
+    <span id="music-label">Play</span>
   </button>
 
-  <audio id="bg-music" loop preload="none"></audio>
+  <audio id="bg-music" loop preload="metadata"></audio>
 
   <script src="wedding-data.js"></script>
   <script src="wedding.js"></script>
