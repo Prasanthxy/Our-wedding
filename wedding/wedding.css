@@ -778,7 +778,7 @@ address {
 /* Music toggle */
 .music-toggle {
   position: fixed;
-  right: max(1rem, env(safe-area-inset-right, 0px));
+  left: max(1rem, env(safe-area-inset-left, 0px));
   bottom: calc(1rem + var(--safe-bottom));
   z-index: 40;
   display: flex;
